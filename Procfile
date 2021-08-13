@@ -1,1 +1,1 @@
-echo web: python run.py > Procfile
+worker: python run.py
