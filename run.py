@@ -1,8 +1,8 @@
 from slackbot.bot import Bot, respond_to
-from datetime import datetime
+from datetime import datetime, timedelta
 import gsd
 
-timestamp = datetime.now()
+timestamp = datetime.now() + timedelta(hours=9)
 date = timestamp.strftime('%Y/%m/%d')
 punch_in_time = timestamp.strftime('%H:%M')
 punch_out_time = timestamp.strftime('%H:%M')
