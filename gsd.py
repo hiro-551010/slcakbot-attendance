@@ -1,5 +1,4 @@
 import pandas as pd
-from slackbot.bot import Bot, respond_to
 import datetime
 from oauth2client.service_account import ServiceAccountCredentials
 import gspread
@@ -57,4 +56,3 @@ def punch_out(date, punch_out_time, sheet_name):
     working_hours = str(out_time - in_time)
     # working_hours記入
     wks.update_cell(cell.row, (cell.col + 1), working_hours)
-

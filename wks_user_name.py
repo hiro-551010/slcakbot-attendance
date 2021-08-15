@@ -9,24 +9,12 @@ date = timestamp.strftime('%Y/%m/%d')
 punch_in_time = timestamp.strftime('%H:%M')
 punch_out_time = timestamp.strftime('%H:%M')
 
-# auth = gsd.Auth()
-# wb = auth.gc.open_by_key(auth.SP_SHEET_KEY)
-
-# timestamp = datetime.now()
-# today = timestamp.strftime('%Y/%m/%d')
-# sheet_name = "こうしえん"
-# username = "hirokazu551010"
-
-# wks = wb.worksheet(title=sheet_name)
-# df = pd.DataFrame(wks.get_all_records(), )
-
-# todayのセルの番号取得
-# cell = wks.find(today)
-# row = wks.row_values(cell.row)
-# list_row = [row]
-# df2 = pd.DataFrame(list_row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
-# wks2 = wb.worksheet(title=username)
-# set_with_dataframe(wks2, df2)
+def wks_username(wks, wks2):
+    cell = wks.find(date)
+    row = wks.row_values(cell.row)
+    list_row = [row]
+    df2 = pd.DataFrame(list_row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
+    set_with_dataframe(wks2, df2)
 
 def punch_in(date, punch_in_time, place_name, username):
     auth = gsd.Auth()
@@ -58,18 +46,10 @@ def punch_in(date, punch_in_time, place_name, username):
             # １回目の人の時刻を打刻
             if username in sheet_list:
                 wks2 = wb.worksheet(title=username)
-                cell = wks.find(date)
-                row = wks.row_values(cell.row)
-                list_row = [row]
-                df2 = pd.DataFrame(list_row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
-                set_with_dataframe(wks2, df2)
+                wks_username(wks, wks2)
             else:
                 wks2 = wb.add_worksheet(title=username, rows=30, cols=100)
-                cell = wks.find(date)
-                row = wks.row_values(cell.row)
-                list_row = [row]
-                df2 = pd.DataFrame(list_row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
-                set_with_dataframe(wks2, df2)
+                wks_username(wks, wks2)
     
     # place_nameのシート名がなかった場合
     else:
@@ -79,34 +59,11 @@ def punch_in(date, punch_in_time, place_name, username):
         set_with_dataframe(wks, df)
         if username in sheet_list:
             wks2 = wb.worksheet(title=username)
-            cell = wks.find(date)
-            row = wks.row_values(cell.row)
-            list_row = [row]
-            df2 = pd.DataFrame(list_row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
-            set_with_dataframe(wks2, df2)
+            wks_username(wks, wks2)
         else:
             wks2 = wb.add_worksheet(title=username, rows=30, cols=100)
-            cell = wks.find(date)
-            row = wks.row_values(cell.row)
-            list_row = [row]
-            df2 = pd.DataFrame(list_row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
-            set_with_dataframe(wks2, df2)
+            wks_username(wks, wks2)
+
+
 
 punch_in(date, punch_in_time, "こうしえん", "hirokazu551010")
-
-
-
-
-
-
-# for date in df.iloc[:,0]:
-#     print(df[date] == today)
-    # if date == today:
-    #     df.find(today)
-    #     wks2 = wb.worksheet(title=username)
-
-
-
-
-
-
