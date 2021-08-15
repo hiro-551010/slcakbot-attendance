@@ -15,7 +15,6 @@ bot = Bot()
 # def bot1(message):
 #     sheet_name = message.user['real_name']
 #     message.send(f'出勤時刻は、{punch_in_time}です')
-#     gsd.punch_in(date, punch_in_time, sheet_name)
 
 # @respond_to('^退勤$')
 # def bot2(message):
@@ -25,14 +24,16 @@ bot = Bot()
 
 @respond_to('^出勤\s+\S.*')
 def bot3(message):
-    sheet_name = message.body['text'][3:]
-    message.send(f'{sheet_name}の出勤時刻は{punch_in_time}です')
-    gsd.punch_in(date, punch_in_time, sheet_name)
+    place_name = message.body['text'][3:]
+    username = message.user['name']
+    message.send(f'{place_name}の出勤時刻は{punch_in_time}です')
+    gsd.punch_in(date, punch_in_time, place_name, username)
 
 @respond_to('^退勤\s+\S.*')
 def bot4(message):
-    sheet_name = message.body['text'][3:]
-    message.send(f'{sheet_name}の退勤時刻は{punch_out_time}です')
-    gsd.punch_in(date, punch_out_time, sheet_name)
+    place_name = message.body['text'][3:]
+    username = message.user['name']
+    message.send(f'{place_name}の退勤時刻は{punch_out_time}です')
+    gsd.punch_out(date, punch_out_time, place_name, username)
     
 bot.run()
