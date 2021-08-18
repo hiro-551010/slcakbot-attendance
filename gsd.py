@@ -6,7 +6,7 @@ from gspread_dataframe import set_with_dataframe
 
 class Auth():
     # ワークブックまで開く処理
-    SP_CREDENTIAL_FILE = "./secrets/attendance-1.json"
+    SP_CREDENTIAL_FILE = "./attendance-1.json"
     SP_SCOPE = [
         'https://spreadsheets.google.com/feeds',
         'https://www.googleapis.com/auth/drive'
