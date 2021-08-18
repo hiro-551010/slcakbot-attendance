@@ -10,3 +10,6 @@ with open(os.path.join('secrets', 'secret.yaml')) as file:
     API_TOKEN = os.environ['API_TOKEN']
 
     DEFAULT_REPLY = "こんにちは、こちらは勤怠管理botです。"
+
+# herokuのAPI_TOKENの設定
+API_TOKEN = os.environ['API_TOKEN']
