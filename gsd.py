@@ -3,6 +3,7 @@ from datetime import datetime
 from oauth2client.service_account import ServiceAccountCredentials
 import gspread
 from gspread_dataframe import set_with_dataframe
+import os
 
 class Auth():
     # ワークブックまで開く処理
@@ -12,9 +13,24 @@ class Auth():
         'https://www.googleapis.com/auth/drive'
     ]
     SP_SHEET_KEY = '1AWzy25WkpHFmf83Y15--T-xZdXRFZ2ZALcLEOXGPkvc'
+    
+    # herokuから環境変数として取得
+    CREDENTIAL = {
+        "type": os.environ['type'],
+        "project_id": os.environ['project_id'],
+        "private_key_id": os.environ['private_key_id'],
+        "private_key": os.environ['private_key'],
+        "client_email": os.environ['client_email'],
+        "client_id": os.environ['client_id'],
+        "auth_uri": os.environ['auth_uri'],
+        "token_uri": os.environ['token_uri'],
+        "auth_provider_x509_cert_url": os.environ['auth_provider_x509_cert_url'],
+        "client_x509_cert_url": os.environ['client_x509_cert_url'],
+    }
 
     def __init__(self):
-        credentials = ServiceAccountCredentials.from_json_keyfile_name(self.SP_CREDENTIAL_FILE, self.SP_SCOPE)
+        
+        credentials = ServiceAccountCredentials.from_json_keyfile_dict(self.CREDENTIAL, self.SP_SCOPE)
         self.gc = gspread.authorize(credentials)
         # self.wb = gc.open_by_key(self.SP_SHEET_KEY)
         # self.sheet_name = sheet_name
