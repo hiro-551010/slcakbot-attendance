@@ -7,7 +7,7 @@ import os
 
 class Auth():
     # ワークブックまで開く処理
-    SP_CREDENTIAL_FILE = "./attendance-1.json"
+    SP_CREDENTIAL_FILE = "./secrets/attendance.json"
     SP_SCOPE = [
         'https://spreadsheets.google.com/feeds',
         'https://www.googleapis.com/auth/drive'
@@ -29,7 +29,6 @@ class Auth():
     }
 
     def __init__(self):
-        
         credentials = ServiceAccountCredentials.from_json_keyfile_dict(self.CREDENTIAL, self.SP_SCOPE)
         self.gc = gspread.authorize(credentials)
         # self.wb = gc.open_by_key(self.SP_SHEET_KEY)
