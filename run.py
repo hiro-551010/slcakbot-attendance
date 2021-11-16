@@ -3,9 +3,7 @@ from datetime import datetime, timedelta
 import gsd
 import re
 
-
 bot = Bot()
-
 
 # @respond_to('^出勤$')
 # def bot1(message):

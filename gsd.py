@@ -35,7 +35,6 @@ class Auth():
         # self.sheet_name = sheet_name
         # self.wks = self.wb.worksheet(sheet_name)
         # self.df = pd.DataFrame(self.wks.get_all_records())
-        punch_in_time = 
 
 def wks_username(date, wks, wks2):
     cell = wks.find(date)
