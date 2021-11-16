@@ -3,8 +3,7 @@ from datetime import datetime, timedelta
 import gsd
 import re
 
-timestamp = datetime.now() + timedelta(hours=9)
-date = timestamp.strftime('%Y/%m/%d')
+
 bot = Bot()
 
 
@@ -23,6 +22,8 @@ bot = Bot()
 def bot3(message):
     place_name = message.body['text'][3:]
     username = message.user['name']
+    timestamp = datetime.now() + timedelta(hours=9)
+    date = timestamp.strftime('%Y/%m/%d')
     punch_in_time = timestamp.strftime('%H:%M')
     message.send(f'{place_name}の出勤時刻は{punch_in_time}です')
     gsd.punch_in(date, punch_in_time, place_name, username)
@@ -31,6 +32,8 @@ def bot3(message):
 def bot4(message):
     place_name = message.body['text'][3:]
     username = message.user['name']
+    timestamp = datetime.now() + timedelta(hours=9)
+    date = timestamp.strftime('%Y/%m/%d')
     punch_out_time = timestamp.strftime('%H:%M')
     message.send(f'{place_name}の退勤時刻は{punch_out_time}です')
     gsd.punch_out(date, punch_out_time, place_name, username)
