@@ -37,6 +37,15 @@ class Auth():
         # self.df = pd.DataFrame(self.wks.get_all_records())
 
 def wks_username(date, wks, wks2):
+    # cellが見つからずにエラー吐いてる
+    # dateがないから
+    try:
+        cell = wks.find(date)
+        row = wks.row_values(cell.row)
+    except:
+        col_list = wks.col_values(1)
+        row_number = len(col_list) + 1
+        wks.update_cell(row_number, 1, date)
     cell = wks.find(date)
     row = wks.row_values(cell.row)
     list_row = [row]
@@ -56,6 +65,7 @@ def punch_in(date, punch_in_time, place_name, username):
     if sheet_name in sheet_list:
         wks = wb.worksheet(title=sheet_name)
         cell = wks.find(date)
+        # cellは日付があったらtrue = 打刻されてる
         if cell:
             row = wks.row_values(cell.row)
             list_row = [row]
@@ -68,6 +78,7 @@ def punch_in(date, punch_in_time, place_name, username):
                 set_with_dataframe(wks2, df2)
         else:
             df_append(date, punch_in_time, wks)
+            # シートに名前があるか
             if username in sheet_list:
                 wks2 = wb.worksheet(title=username)
                 wks_username(date, wks, wks2)
