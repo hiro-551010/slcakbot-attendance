@@ -122,9 +122,13 @@ def punch_out(date, punch_out_time, place_name, username):
     # ここでエラー
     try:
         cell = wks.find('0:00')
-        wks.update_cell(cell.row, cell.col, punch_out_time)
+        if cell:
+            wks.update_cell(cell.row, cell.col, punch_out_time)
+        else:
+            pass
     except:
-        cell = wks.find('2022/2/24')
+        cell = wks.find(date)
+
     working_hours(wks)
     wks2 = wb.worksheet(title=username)
     row = wks.row_values(cell.row)

@@ -31,28 +31,37 @@ def test(wks):
     # else:
     #     wks.update_cell(-1, 1, date)
 
-    try:
-        cell = wks.find(date)
-        row = wks.row_values(cell.row)
-    except:
-        col_list = wks.col_values(1)
-        row_number = len(col_list) + 1
-        wks.update_cell(row_number, 1, date)
+    # try:
+    #     cell = wks.find(date)
+    #     row = wks.row_values(cell.row)
+    # except:
+    #     col_list = wks.col_values(1)
+    #     row_number = len(col_list) + 1
+    #     wks.update_cell(row_number, 1, date)
 
-    cell = wks.find(date)
-    row = wks.row_values(cell.row)
-    names = row[4:]
-    names.append('白')
+    # cell = wks.find(date)
+    # row = wks.row_values(cell.row)
+    # names = row[4:]
+    # names.append('白')
 
-    print(names)
     # row_number = 5
     # for name in names:
     #     wks.update_cell(cell.row, row_number, name)
     #     row_number += 1
-    n = ""
+    # n = ""
+    # for name in names:
+    #     n += "," + name
+    # wks.update_cell(10, 10, n)
 
-    for name in names:
-        n += "," + name
-    
-    wks.update_cell(10, 10, n)
+    try:
+        cell = wks.find('01')
+        if cell:
+          print("true")
+        else:
+          print('false')
+          cell = 100
+    except:
+      pass
+    print(cell)
+
 test(wks)
