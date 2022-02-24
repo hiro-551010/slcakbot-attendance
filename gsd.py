@@ -70,7 +70,7 @@ def punch_in(date, punch_in_time, place_name, username):
         if cell:
             row = wks.row_values(cell.row)
             list_row = [row]
-            df2 = pd.DataFrame(list_row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
+            df2 = pd.DataFrame(list_row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間", "出勤者"])
             if username in sheet_list:
                 wks2 = wb.worksheet(title=username)
                 set_with_dataframe(wks2, df2)
@@ -123,5 +123,5 @@ def punch_out(date, punch_out_time, place_name, username):
     wks2 = wb.worksheet(title=username)
     row = wks.row_values(cell.row)
     row_list = [row]
-    df = pd.DataFrame(row_list, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
+    df = pd.DataFrame(row_list, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間", "出勤者"])
     set_with_dataframe(wks2, df)
