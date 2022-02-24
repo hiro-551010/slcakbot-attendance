@@ -6,6 +6,6 @@ def attendant(wks, date, username):
     row_number = 5
     n = ""
     for name in names:
-        n += "," + name
+        n += name + '、'
 
     wks.update_cell(cell.row, row_number, n)

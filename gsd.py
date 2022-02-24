@@ -117,8 +117,12 @@ def punch_out(date, punch_out_time, place_name, username):
     wb = auth.gc.open_by_key(auth.SP_SHEET_KEY)
     sheet_name = place_name
     wks = wb.worksheet(title=sheet_name)
-    cell = wks.find('0:00')
-    wks.update_cell(cell.row, cell.col, punch_out_time)
+    # ここでエラー
+    try:
+        cell = wks.find('0:00')
+        wks.update_cell(cell.row, cell.col, punch_out_time)
+    except:
+        cell = wks.find(date)
     working_hours(wks)
     wks2 = wb.worksheet(title=username)
     row = wks.row_values(cell.row)
