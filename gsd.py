@@ -69,7 +69,7 @@ def punch_in(date, punch_in_time, place_name, username):
         # cellは日付があったらtrue = 打刻されてる
         if cell:
             row = wks.row_values(cell.row)
-            row = [:4]
+            row = row[:4]
             list_row = [row]
             df2 = pd.DataFrame(list_row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
             if username in sheet_list:
