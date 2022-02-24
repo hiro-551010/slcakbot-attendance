@@ -136,5 +136,5 @@ def punch_out(date, punch_out_time, place_name, username):
     row = wks.row_values(cell.row)
     row = row[:4]
     row_list = [row]
-    df = pd.DataFrame(row_list, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間", "出勤者"])
+    df = pd.DataFrame(row_list, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
     set_with_dataframe(wks2, df)
