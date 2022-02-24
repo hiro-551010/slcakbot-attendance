@@ -108,9 +108,11 @@ def working_hours(wks):
     in_time = datetime.strptime(time1, '%H:%M')
     out_time = datetime.strptime(time2, '%H:%M')
     working_hour = str(out_time - in_time)
-    cell2 = wks.find('0:00')
-    wks.update_cell(cell2.row, cell2.col, working_hour)
-
+    try:
+        cell2 = wks.find('0:00')
+        wks.update_cell(cell2.row, cell2.col, working_hour)
+    except:
+        pass
 
 def punch_out(date, punch_out_time, place_name, username):
     auth = Auth()
