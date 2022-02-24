@@ -127,9 +127,9 @@ def punch_out(date, punch_out_time, place_name, username):
             wks.update_cell(cell.row, cell.col, punch_out_time)
             working_hours(wks)
         else:
-            pass
+            cell = wks.find(date)
     except:
-        cell = wks.find(date)
+        pass
 
     # wks2はユーザーの名前のシート
     wks2 = wb.worksheet(title=username)

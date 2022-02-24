@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from tkinter import E
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
@@ -16,7 +17,7 @@ gc = gspread.authorize(credentials)
 
 
 wb = gc.open_by_key(SP_SHEET_KEY)
-sheet_name = 'こうしえん'
+sheet_name = '甲子園'
 wks = wb.worksheet(title=sheet_name)
 df = pd.DataFrame(wks.get_all_values())
 
@@ -62,13 +63,31 @@ def test(wks):
     #       cell = 100
     # except:
     #   pass
-    cell = wks.find(date)
-    row = wks.row_values(cell.row)
 
-    row = row[:4]
-    row = [row]
+    # cell = wks.find(date)
+    # row = wks.row_values(cell.row)
+    # row = row[:4]
+    # row = [row]
+    # df = pd.DataFrame(row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
+    # print(df)
 
-    df = pd.DataFrame(row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
-    print(df)
+    # try:
+    #     cell = wks.find('0:00')
+    #     row = wks.row_values(cell.row)
+    # except:
+    #     cell = wks.find(date)
+
+    # print(cell)
+
+    try:
+        cell = wks.find('0:00')
+        if cell:
+            print('true')
+        else:
+            cell = wks.find(date)
+    except:
+        pass
+
+    print(cell)
 
 test(wks)
