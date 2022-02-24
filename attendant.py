@@ -4,6 +4,8 @@ def attendant(wks, date, username):
     names = row[4:]
     names.append(username)
     row_number = 5
+    n = ""
     for name in names:
-        wks.update_cell(cell.row, row_number, name)
-        row_number += 1
+        n += "," + name
+
+    wks.update_cell(cell.row, row_number, n)

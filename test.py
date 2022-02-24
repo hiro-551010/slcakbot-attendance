@@ -45,13 +45,14 @@ def test(wks):
     names.append('白')
 
     print(names)
-    row_number = 5
+    # row_number = 5
+    # for name in names:
+    #     wks.update_cell(cell.row, row_number, name)
+    #     row_number += 1
+    n = ""
+
     for name in names:
-        wks.update_cell(cell.row, row_number, name)
-        row_number += 1
-
-
+        n += "," + name
     
-
-
+    wks.update_cell(10, 10, n)
 test(wks)
