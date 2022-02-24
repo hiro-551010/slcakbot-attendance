@@ -4,6 +4,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import gspread
 from gspread_dataframe import set_with_dataframe
 import os
+from attendant import attendant
 
 class Auth():
     # ワークブックまで開く処理
@@ -49,12 +50,12 @@ def wks_username(date, wks, wks2):
     cell = wks.find(date)
     row = wks.row_values(cell.row)
     list_row = [row]
-    df2 = pd.DataFrame(list_row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間", "aaa"])
+    df2 = pd.DataFrame(list_row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
     set_with_dataframe(wks2, df2)
 
-def df_append(date, punch_in_time, wks, username):
+def df_append(date, punch_in_time, wks):
     df = pd.DataFrame(wks.get_all_records())
-    df = df.append({'日付': date, '出勤時刻': punch_in_time, '退勤時刻': '00:00', '働いた時間': '00:00', '出勤者' : username}, ignore_index=True)
+    df = df.append({'日付': date, '出勤時刻': punch_in_time, '退勤時刻': '00:00', '働いた時間': '00:00'}, ignore_index=True)
     set_with_dataframe(wks, df)
 
 def punch_in(date, punch_in_time, place_name, username):
@@ -77,14 +78,16 @@ def punch_in(date, punch_in_time, place_name, username):
                 wks2 = wb.add_worksheet(title=username, rows=30, cols=100)
                 set_with_dataframe(wks2, df2)
         else:
-            df_append(date, punch_in_time, wks, username)
-            # シートに名前があるか
+            df_append(date, punch_in_time, wks)
+            # シートにユーザーの名前があるか
             if username in sheet_list:
                 wks2 = wb.worksheet(title=username)
                 wks_username(date, wks, wks2)
             else:
                 wks2 = wb.add_worksheet(title=username, rows=30, cols=100)
                 wks_username(date, wks, wks2)
+        # 場所に対しての出勤者を記入
+        attendant(wks, date, username)
     else:
         wks = wb.add_worksheet(title=sheet_name, rows="100", cols="30")
         df_append(date, punch_in_time, wks)
@@ -94,6 +97,8 @@ def punch_in(date, punch_in_time, place_name, username):
         else:
             wks2 = wb.add_worksheet(title=username, rows="100", cols="30")
             wks_username(date, wks, wks2)
+        # 場所に対しての出勤者を記入
+        attendant(wks, date, username)
 
     
 def working_hours(wks):

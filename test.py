@@ -16,7 +16,7 @@ gc = gspread.authorize(credentials)
 
 
 wb = gc.open_by_key(SP_SHEET_KEY)
-sheet_name = 'hirokazu551010'
+sheet_name = 'こうしえん'
 wks = wb.worksheet(title=sheet_name)
 df = pd.DataFrame(wks.get_all_values())
 
@@ -31,13 +31,25 @@ def test(wks):
     # else:
     #     wks.update_cell(-1, 1, date)
 
-    # try:
-    #     cell = wks.find(date)
-    #     row = wks.row_values(cell.row)
-    # except:
-    #     col_list = wks.col_values(1)
-    #     row_number = len(col_list) + 1
-    #     wks.update_cell(row_number, 1, date)
+    try:
+        cell = wks.find(date)
+        row = wks.row_values(cell.row)
+    except:
+        col_list = wks.col_values(1)
+        row_number = len(col_list) + 1
+        wks.update_cell(row_number, 1, date)
+
+    cell = wks.find(date)
+    row = wks.row_values(cell.row)
+    names = row[4:]
+    names.append('白')
+
+    print(names)
+    row_number = 5
+    for name in names:
+        wks.update_cell(cell.row, row_number, name)
+        row_number += 1
+
 
     
 
