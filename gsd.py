@@ -49,7 +49,7 @@ def wks_username(date, wks, wks2):
     cell = wks.find(date)
     row = wks.row_values(cell.row)
     list_row = [row]
-    df2 = pd.DataFrame(list_row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
+    df2 = pd.DataFrame(list_row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間", "aaa"])
     set_with_dataframe(wks2, df2)
 
 def df_append(date, punch_in_time, wks, username):
