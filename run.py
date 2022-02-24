@@ -19,7 +19,7 @@ bot = Bot()
 @respond_to('^出勤\s+\S.*')
 def bot3(message):
     place_name = message.body['text'][3:]
-    username = message.body['user']
+    username = message.user['profile']['display_name']
     timestamp = datetime.now() + timedelta(hours=9)
     date = timestamp.strftime('%Y/%m/%d')
     punch_in_time = timestamp.strftime('%H:%M')
