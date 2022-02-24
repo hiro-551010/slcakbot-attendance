@@ -52,7 +52,7 @@ def wks_username(date, wks, wks2):
     df2 = pd.DataFrame(list_row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
     set_with_dataframe(wks2, df2)
 
-def df_append(date, punch_in_time, wks):
+def df_append(date, punch_in_time, wks, username):
     df = pd.DataFrame(wks.get_all_records())
     df = df.append({'日付': date, '出勤時刻': punch_in_time, '退勤時刻': '00:00', '働いた時間': '00:00', '出勤者' : username}, ignore_index=True)
     set_with_dataframe(wks, df)
