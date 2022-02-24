@@ -21,7 +21,8 @@ wks = wb.worksheet(title=sheet_name)
 df = pd.DataFrame(wks.get_all_values())
 
 
-def wks_username(wks):
+
+def test(wks):
     timestamp = datetime.now()
     date = timestamp.strftime('%Y/%m/%d')
     # if date:
@@ -30,14 +31,15 @@ def wks_username(wks):
     # else:
     #     wks.update_cell(-1, 1, date)
 
-    try:
-        cell = wks.find(date)
-        row = wks.row_values(cell.row)
-    except:
-        col_list = wks.col_values(1)
-        row_number = len(col_list) + 1
-        wks.update_cell(row_number, 1, date)
+    # try:
+    #     cell = wks.find(date)
+    #     row = wks.row_values(cell.row)
+    # except:
+    #     col_list = wks.col_values(1)
+    #     row_number = len(col_list) + 1
+    #     wks.update_cell(row_number, 1, date)
+
     
 
 
-wks_username(wks)
+test(wks)
