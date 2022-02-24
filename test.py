@@ -53,15 +53,22 @@ def test(wks):
     #     n += "," + name
     # wks.update_cell(10, 10, n)
 
-    try:
-        cell = wks.find('01')
-        if cell:
-          print("true")
-        else:
-          print('false')
-          cell = 100
-    except:
-      pass
-    print(cell)
+    # try:
+    #     cell = wks.find('01')
+    #     if cell:
+    #       print("true")
+    #     else:
+    #       print('false')
+    #       cell = 100
+    # except:
+    #   pass
+    cell = wks.find(date)
+    row = wks.row_values(cell.row)
+
+    row = row[:4]
+    row = [row]
+
+    df = pd.DataFrame(row, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間"])
+    print(df)
 
 test(wks)

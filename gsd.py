@@ -122,16 +122,19 @@ def punch_out(date, punch_out_time, place_name, username):
     # ここでエラー
     try:
         cell = wks.find('0:00')
+        # 1回目の退勤
         if cell:
             wks.update_cell(cell.row, cell.col, punch_out_time)
+            working_hours(wks)
         else:
             pass
     except:
         cell = wks.find(date)
 
-    working_hours(wks)
+    # wks2はユーザーの名前のシート
     wks2 = wb.worksheet(title=username)
     row = wks.row_values(cell.row)
+    row = row[:4]
     row_list = [row]
     df = pd.DataFrame(row_list, columns=["日付", "出勤時刻", "退勤時刻", "働いた時間", "出勤者"])
     set_with_dataframe(wks2, df)
